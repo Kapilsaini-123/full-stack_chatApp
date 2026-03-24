@@ -1,0 +1,15 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: chatapp-gateway
+  namespace: chat-app
+spec:
+  gatewayClassName: envoy-gateway-class   # must match your GatewayClass
+  listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+      hostname: "chatapp.local"
+      allowedRoutes:
+        namespaces:
+          from: Same
